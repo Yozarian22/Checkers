@@ -8,8 +8,8 @@ public class Board {
     public Board() {
 
         board = new Square[boardLength][boardWidth];
-        for (int i = 0; i < boardLength; i++) {
-            for (int j = 0; j < boardWidth; j++) {
+        for (int j = 0; j < boardLength; j++) {
+            for (int i = 0; i < boardWidth; i++) {
                 board[i][j] = new Square();
 
                 if (i == 0 || i == 2) {
@@ -33,9 +33,8 @@ public class Board {
         }
     }
 
-    public boolean update(List<int[]> moves) {
+    public void update(List<int[]> moves) {
         boolean valid = checkValidMoves(moves);
-        if (valid) {
             int[] st = moves.get(0);
             Square start = board[st[0]][st[1]];
 
@@ -57,8 +56,6 @@ public class Board {
                     jumped.piece = null;
                 }
             }
-        }
-        return valid;
     }
 
     public boolean checkValidMoves(List<int[]> moves) {
@@ -91,8 +88,9 @@ public class Board {
     }
 
     public String toString() {
-        String s = "";
+        String s = "  0  1  2  3  4  5  6  7 \n";
         for (int i = 0; i < boardLength; i++) {
+                s += i;
             for (int j = 0; j < boardWidth; j++) {
                 Piece p = board[i][j].piece;
                 if (p == null) {
@@ -108,7 +106,7 @@ public class Board {
         return s;
     }
 
-    class Square {
+    public class Square {
         Piece piece;
     }
 }
